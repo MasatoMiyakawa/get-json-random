@@ -1,0 +1,27 @@
+<div class="banner">
+<p class="banner-loading"><img src="loading.gif" alt="loading"></p>
+<script>
+$(function(){
+  setBanner();
+});
+
+var setBanner = function() {
+  $.ajax({
+      url: 'banner.json',
+      type: 'GET',
+      dataType: 'json'
+  })
+  .done(function(data) {
+    var i = parseInt(Math.random() * data.length);    
+    html = '<a href="'+data[i].url+'"><img src="'+data[i].image+'" alt="'+data[i].text+"'></a>';
+    $('.banner').append(html);
+  })
+	.always(function( data ) {
+	$(".banner-loading").hide();
+	})  
+  .fail(function( data ) {
+    console.log(data);
+  });
+}
+</script>
+</div>
